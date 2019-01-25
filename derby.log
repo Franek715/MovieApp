@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Jan 25 16:53:06 CET 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0168-85b6-f31b-000006833608 
+on database directory D:\Java\Projects\MovieApp\sampleDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/D:/Java/Projects/MovieApp/dist/run1730434217/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_141-b15
+user.dir=D:\Java\Projects\MovieApp
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
