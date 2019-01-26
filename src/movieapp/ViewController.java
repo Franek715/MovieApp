@@ -16,6 +16,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +35,8 @@ public class ViewController implements Initializable {
     @FXML
     Pane moviePane;
     @FXML
+    Pane exportPane;
+    @FXML
     TableView table;
     @FXML
     TextField inputTitle;
@@ -46,6 +50,11 @@ public class ViewController implements Initializable {
     Button addMovieButton;
     
     DB db = new DB();
+    
+    private final String MENU_MOVIES = "Filmek";
+    private final String MENU_LIST = "Lista";
+    private final String MENU_EXPORT = "Exportálás";
+    private final String MENU_EXIT = "Kilépés";
 
     
     private final ObservableList<Movie> data =
@@ -172,9 +181,31 @@ public class ViewController implements Initializable {
         table.setItems(data);
     }
     
+    
+    public void setMenuData() {
+        TreeItem<String> treeItemRoot1 = new TreeItem<>("Menü");
+        TreeView<String> treeView = new TreeView<>(treeItemRoot1);
+        
+        treeView.setShowRoot(false);
+        
+        TreeItem<String> nodeItemA = new TreeItem<>(MENU_MOVIES);
+        TreeItem<String> nodeItemB = new TreeItem<>(MENU_EXIT);
+        
+        nodeItemA.setExpanded(true);
+        
+        TreeItem<String> nodeItemA1 = new TreeItem<>(MENU_LIST);
+        TreeItem<String> nodeItemA2 = new TreeItem<>(MENU_EXPORT);
+        
+        nodeItemA.getChildren().addAll(nodeItemA1, nodeItemA2);
+        treeItemRoot1.getChildren().addAll(nodeItemA, nodeItemB);
+        
+        menuPane.getChildren().add(treeView);
+        menuPane.setVisible(true);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setTableData();
+        setMenuData();
     }    
     
 }

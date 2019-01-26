@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchor" fx:id="anchor" prefHeight="800" prefWidth="690" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="movieapp.ViewController">
+<AnchorPane id="anchor" fx:id="anchor" prefHeight="800" prefWidth="690" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="movieapp.ViewController">
    <children>
-      <SplitPane id="mainSplit" fx:id="mainSplit" dividerPositions="0.21220930232558138" prefHeight="800.0" prefWidth="690.0">
+      <SplitPane id="mainSplit" fx:id="mainSplit" dividerPositions="0.2311046511627907" prefHeight="800.0" prefWidth="690.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <StackPane id="menuPane" fx:id="menuPane" prefHeight="800.0" prefWidth="143.0" />
+                  <StackPane id="menuPane" fx:id="menuPane" prefHeight="798.0" prefWidth="143.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="135.0">
@@ -57,7 +57,7 @@
                               <Insets bottom="20.0" top="20.0" />
                            </padding>
                         </VBox>
-                        <Button id="addMovieButton" fx:id="addMovieButton" onAction = "#addMovie" layoutX="345.0" layoutY="670.0" mnemonicParsing="false" text="Új film hozzáadása">
+                        <Button id="addMovieButton" fx:id="addMovieButton" layoutX="345.0" layoutY="670.0" mnemonicParsing="false" onAction="#addMovie" text="Új film hozzáadása">
                            <font>
                               <Font size="16.0" />
                            </font>

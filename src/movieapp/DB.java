@@ -45,10 +45,10 @@ public class DB {
         try {
             ResultSet rs = dbmd.getTables(null, "APP", "USERS", null);
             if (!rs.next()) {
-			crstmt.execute("create table movies (id INT not null primary key GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1), title varchar(20), length varchar(8), language varchar(15), date varchar(10))");
+//			crstmt.execute("create table movies (id INT not null primary key GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1), title varchar(20), length varchar(8), language varchar(15), date varchar(10))");
             }
         } catch (SQLException ex) {
-                System.out.println("Problem while creating the tables: " + ex);
+                System.out.println("Problem while creating the table: " + ex);
         }
     
     }
@@ -91,7 +91,6 @@ public class DB {
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     
