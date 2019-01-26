@@ -75,7 +75,7 @@ public class ViewController implements Initializable {
     private void addMovie(ActionEvent event) {
         String length = inputLength.getText(); 
         String date = inputDate.getText();
-        if ((length.length() < 8 && length.contains(":") && date.length() < 11 && date.contains("-"))
+        if ((length.length() < 9 && length.contains(":") && date.length() < 11 && date.contains("-"))
                 && inputTitle.getText().length() > 0 && length.length()> 0 && inputLanguage.getText().length() > 0 && date.length() > 0) {
             Movie newMovie = new Movie (inputTitle.getText(), length, inputLanguage.getText(), date);
             data.add(newMovie);
@@ -193,7 +193,18 @@ public class ViewController implements Initializable {
         removeCol.setCellFactory( cellFactory );
         
         table.getColumns().addAll(titleCol, lengthCol, languageCol, dateCol, removeCol);
+        
+        
         data.addAll(db.getAllMovies());
+        for (int i = 0;i<data.size()-1;i++) {
+            for (int j = i+1;j<data.size();j++) {
+                if (Integer.parseInt(data.get(i).getDate().substring(0,4)) < Integer.parseInt(data.get(j).getDate().substring(0,4))) {
+                    Movie s = data.get(i);
+                    data.set(i, data.get(j));
+                    data.set(j, s);
+                }
+            }
+        }
         table.setItems(data);
     }
     
