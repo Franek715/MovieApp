@@ -3,12 +3,16 @@ package movieapp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -20,9 +24,12 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class ViewController implements Initializable {
@@ -47,7 +54,11 @@ public class ViewController implements Initializable {
     @FXML
     TextField inputDate;
     @FXML
+    TextField inputExportName;
+    @FXML
     Button addMovieButton;
+    @FXML
+    Button exportButton;
     
     DB db = new DB();
     
@@ -62,13 +73,18 @@ public class ViewController implements Initializable {
     
     @FXML
     private void addMovie(ActionEvent event) {
-        Movie newMovie = new Movie (inputTitle.getText(), inputLength.getText(), inputLanguage.getText(), inputDate.getText());
-        data.add(newMovie);
-        db.addMovie(newMovie);
-        inputTitle.clear();
-        inputLength.clear();
-        inputLanguage.clear();
-        inputDate.clear();
+        String length = inputLength.getText(); 
+        String date = inputDate.getText();
+        if ((length.length() < 8 && length.contains(":") && date.length() < 11 && date.contains("-"))
+                && inputTitle.getText().length() > 0 && length.length()> 0 && inputLanguage.getText().length() > 0 && date.length() > 0) {
+            Movie newMovie = new Movie (inputTitle.getText(), length, inputLanguage.getText(), date);
+            data.add(newMovie);
+            db.addMovie(newMovie);
+            inputTitle.clear();
+            inputLength.clear();
+            inputLanguage.clear();
+            inputDate.clear();
+        } else alert("A megadott hossz vagy dátum formátuma nem megfelelő!");
     }
     
     public void setTableData() {
@@ -193,15 +209,81 @@ public class ViewController implements Initializable {
         
         nodeItemA.setExpanded(true);
         
-        TreeItem<String> nodeItemA1 = new TreeItem<>(MENU_LIST);
-        TreeItem<String> nodeItemA2 = new TreeItem<>(MENU_EXPORT);
+        Node movieNode = new ImageView(new Image(getClass().getResourceAsStream("/movie2.png")));
+        Node exportNode = new ImageView(new Image(getClass().getResourceAsStream("/export.png")));
+        TreeItem<String> nodeItemA1 = new TreeItem<>(MENU_LIST, movieNode);
+        TreeItem<String> nodeItemA2 = new TreeItem<>(MENU_EXPORT, exportNode);
         
         nodeItemA.getChildren().addAll(nodeItemA1, nodeItemA2);
         treeItemRoot1.getChildren().addAll(nodeItemA, nodeItemB);
         
         menuPane.getChildren().add(treeView);
-        menuPane.setVisible(true);
+        
+        treeView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+                String selectedMenu;
+                selectedMenu = selectedItem.getValue();
+                
+                if(selectedMenu != null) {
+                    switch (selectedMenu) {
+                        case MENU_MOVIES:
+                            try {
+                                selectedItem.setExpanded(true);
+                            } catch (Exception e) {
+                            }
+                        case MENU_LIST:
+                            moviePane.setVisible(true);
+                            exportPane.setVisible(false);
+                            break;
+                        case MENU_EXPORT:
+                            moviePane.setVisible(false);
+                            exportPane.setVisible(true);
+                            break;
+                        case MENU_EXIT:
+                            System.exit(0);
+                            break;
+                    }
+                }
+            }
+        });
     }
+    
+    @FXML
+    private void exportList(ActionEvent event) {
+        PdfGeneration pdfCreator = new PdfGeneration();
+        String fileName = inputExportName.getText();
+        fileName = fileName.replaceAll("\\s+", "");
+        if (fileName != null && !fileName.equals("")) {
+            pdfCreator.pdfGeneration(fileName, data);
+        } else {
+            alert("Adj meg egy fájlnevet!");
+        }
+    }
+
+    public void alert(String msg) {
+        mainSplit.setDisable(true);
+        mainSplit.setOpacity(0.4);
+        
+        Label label = new Label(msg);
+        Button alertButton = new Button("OK");
+        VBox vbox = new VBox(label, alertButton);
+        vbox.setAlignment(Pos.CENTER);
+        
+        alertButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                mainSplit.setDisable(false);
+                mainSplit.setOpacity(1);
+                vbox.setVisible(false);
+            }
+        });
+      
+        anchor.getChildren().add(vbox);
+        anchor.setTopAnchor(vbox, 300.0);
+        anchor.setLeftAnchor(vbox, 250.0);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setTableData();

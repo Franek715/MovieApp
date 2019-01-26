@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Sat Jan 26 17:02:49 CET 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0168-8ae6-357b-0000068c87d0 
+Sat Jan 26 21:08:01 CET 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0168-8bc6-b095-00000680a2f0 
 on database directory D:\Java\Projects\MovieApp\sampleDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/D:/Java/Projects/MovieApp/dist/run1110698547/lib/derby.jar
+Loaded from file:/D:/Java/Projects/MovieApp/dist/run1916725314/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_141-b15
 user.dir=D:\Java\Projects\MovieApp

@@ -8,20 +8,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchor" fx:id="anchor" prefHeight="800" prefWidth="690" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="movieapp.ViewController">
+<AnchorPane id="anchor" fx:id="anchor" prefHeight="800" prefWidth="650" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="movieapp.ViewController">
    <children>
-      <SplitPane id="mainSplit" fx:id="mainSplit" dividerPositions="0.2311046511627907" prefHeight="800.0" prefWidth="690.0">
+      <SplitPane id="mainSplit" fx:id="mainSplit" dividerPositions="0.19186046511627908" prefHeight="800.0" prefWidth="690.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <StackPane id="menuPane" fx:id="menuPane" prefHeight="798.0" prefWidth="143.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <StackPane id="menuPane" fx:id="menuPane" prefHeight="798.0" prefWidth="143.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="135.0">
                <children>
-                  <Pane id="moviePane" fx:id="moviePane" prefHeight="800.0" prefWidth="539.0">
+                  <Pane id="exportPane" fx:id="exportPane" prefHeight="798.0" prefWidth="526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView id="table" fx:id="table" prefHeight="575.0" prefWidth="539.0" />
+                        <Label layoutX="158.0" layoutY="95.0" text="Exportálás PDF-be">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <TextField id="inputExportName" fx:id="inputExportName" layoutX="189.0" layoutY="310.0" />
+                        <Button id="exportButton" fx:id="exportButton" layoutX="210.0" layoutY="368.0" mnemonicParsing="false" onAction="#exportList" text="PDF mentése">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="224.0" layoutY="274.0" text="Fájl neve:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children></Pane>
+                  <Pane id="moviePane" fx:id="moviePane" prefHeight="798.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView id="table" fx:id="table" prefHeight="575.0" prefWidth="553.0" />
                         <Label layoutX="102.0" layoutY="613.0" text="Cím:">
                            <font>
                               <Font size="18.0" />
